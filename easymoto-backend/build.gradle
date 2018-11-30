@@ -1,0 +1,69 @@
+buildscript {
+	ext {
+		springBootVersion = '2.1.0.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath('se.transmode.gradle:gradle-docker:1.2')
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'docker'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'org.easymoto'
+version = '0.0.1'
+sourceCompatibility = 1.8
+
+jar {
+	baseName = 'easymoto-backend'
+	version =  '0.0.1'
+}
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile("org.springframework.boot:spring-boot-starter-data-neo4j")
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter')
+	runtime('org.springframework.boot:spring-boot-devtools')
+	compileOnly('org.projectlombok:lombok')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.neo4j:neo4j-ogm-embedded-driver:3.1.5')
+	testCompile('org.neo4j:neo4j-kernel:3.5.0')
+	testCompile('org.neo4j:neo4j:3.5.0')	
+}
+
+task buildDockerBackend(type: Docker, dependsOn: build) {
+  push = false
+  applicationName = jar.baseName
+  dockerfile = file('src/main/docker/Dockerfile.backend')
+  doFirst {
+    copy {
+      from jar
+      into stageDir
+    }
+  }
+}
+
+task buildDockerDatabase(type: Docker) {
+  push = false
+  applicationName = 'easymoto-database'
+  dockerfile = file('src/main/docker/Dockerfile.database')
+  doFirst {
+    copy {
+      from jar
+      into stageDir
+    }
+  }
+}

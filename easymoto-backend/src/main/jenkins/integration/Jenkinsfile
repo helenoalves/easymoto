@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout'){
+            steps {
+                echo 'Checkout Project'
+                checkout scm
+            }
+        }
+        
+        stage('Build'){
+            steps {
+                echo 'Checkout Project'
+                gradle {
+            		tasks('clean')
+            		tasks('build')
+            		useWrapper(true)
+        		}
+            }
+        }
+        
+    }
+    post {
+        always {
+            echo 'Esse texto será impresso sempre ao final !'
+        }
+    }
+}

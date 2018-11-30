@@ -1,0 +1,8 @@
+FROM neo4j:3.5.0
+
+RUN apk --no-cache add curl
+
+EXPOSE 7474 7473 7687
+
+ENTRYPOINT ["/sbin/tini", "-g", "--", "/docker-entrypoint.sh"]
+CMD ["neo4j"]

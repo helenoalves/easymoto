@@ -20,6 +20,7 @@ pipeline {
         }
         
     }
+    
     post {
         always {
             echo 'Esse texto será impresso sempre ao final !'

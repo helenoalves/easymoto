@@ -11,10 +11,12 @@ pipeline {
         stage('Build'){
             steps {
                 echo 'Checkout Project'
-                gradle {
-            		tasks('clean')
-            		tasks('build')
-            		useWrapper(true)
+                dir('easymoto-beckend'){
+	                gradle {
+	            		tasks('clean')
+	            		tasks('build')
+	            		useWrapper(true)
+	        		}
         		}
             }
         }

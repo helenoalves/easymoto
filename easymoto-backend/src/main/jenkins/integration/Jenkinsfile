@@ -46,7 +46,7 @@ pipeline {
     
     post {
         always {
-            echo 'Fim do build do projeto ${params.REPOSITORIO_NOME} !'
+            echo """Fim do build do projeto ${params.REPOSITORIO_NOME} !"""
         }
     }
 

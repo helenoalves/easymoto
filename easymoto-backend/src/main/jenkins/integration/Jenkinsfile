@@ -1,5 +1,19 @@
 pipeline {
     agent any
+
+    tools {
+        gradle 'gradle'
+    }
+
+    parameters {
+        string(name: 'REPOSITORIO_NOME', defaultValue: 'Projeto-EasyMoto', description: 'Nome do repositorio git')
+    }
+
+    options {
+        // Guarda os 5 builds mais recentes
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+    }
+   
     stages {
         stage('Checkout'){
             steps {

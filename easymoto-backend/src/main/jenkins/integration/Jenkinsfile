@@ -21,8 +21,11 @@ pipeline {
             steps {
                 echo 'Testing'
                 dir('easymoto-backend'){
-                	sh './gradlew test'
-                	junit 'build/test-results/test/*.xml'
+                	try{
+                		sh './gradlew test'
+                	} finally {
+                		junit 'build/test-results/test/*.xml'
+                	}
         		}
             }
         }

@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        gradle 'gradle'
-    }
-
     parameters {
         string(name: 'REPOSITORIO_NOME', defaultValue: 'Projeto-EasyMoto', description: 'Nome do repositorio git')
     }

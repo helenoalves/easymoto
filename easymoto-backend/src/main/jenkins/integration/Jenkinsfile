@@ -45,18 +45,9 @@ pipeline {
     }
     
     post {
-    
         always {
-            echo 'Esse texto será impresso sempre ao final !'
+            echo 'Fim do build do projeto ${params.REPOSITORIO_NOME} !'
         }
-        
-        failure {
-            echo 'Esse texto será impresso sempre ao final !'
-        }
-        
-        success {
-            echo 'Esse texto será impresso sempre ao final !'
-        }
-        
     }
+
 }

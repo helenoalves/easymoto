@@ -67,7 +67,6 @@ public class OperationAddTest {
 		OperationStrategy addOp = factory.getBean(OperationAdd.COMPONENT_NAME, OperationStrategy.class);
 
 		addOp.execute(operationAddCity1, Distance.builder().toCity(City.builder().id("2").build()).value(10).build());
-		assertNotNull(cityRepository.findByName("Operation Add - City 1"));
 	}
 
 	@Test

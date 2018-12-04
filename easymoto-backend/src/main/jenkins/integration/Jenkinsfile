@@ -11,7 +11,7 @@ pipeline {
         stage('Build'){
             steps {
                 echo 'Checkout Project'
-                dir('easymoto-beckend'){
+                dir('easymoto/easymoto-beckend'){
                 sh 'ls -lh'
                 	sh './gradlew clean build'
         		}

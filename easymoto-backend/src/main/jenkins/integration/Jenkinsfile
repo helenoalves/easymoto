@@ -39,5 +39,14 @@ pipeline {
         always {
             echo 'Esse texto será impresso sempre ao final !'
         }
+        
+        failure {
+            echo 'Esse texto será impresso sempre ao final !'
+        }
+        
+        success {
+            echo 'Esse texto será impresso sempre ao final !'
+        }
+        
     }
 }

@@ -1,19 +1,5 @@
 pipeline {
     agent any
-
-    parameters {
-        string(name: 'REPOSITORIO_NOME', defaultValue: 'Projeto-EasyMoto', description: 'Nome do repositorio git')
-        booleanParam(name: 'FAZER_ACAO', defaultValue: false, description: 'Fazer um estagio da pipeline ?')
-    }
-
-    triggers {
-        cron('H */8 * * *') //regular builds
-    }
-
-    options {
-        // Guarda os 5 builds mais recentes
-        buildDiscarder(logRotator(numToKeepStr: '5'))
-    }
    
     stages {
         stage('Checkout'){
@@ -47,20 +33,11 @@ pipeline {
             }
         }
 
-        stage("Devo Rodar") {
-            when{
-                expression { params.FAZER_ACAO }
-            }
-            steps {
-                echo 'Executando uma ação...'
-            }
-        }
-
     }
     
     post {
         always {
-            echo """Fim do build do projeto ${params.REPOSITORIO_NOME} !"""
+            echo 'Esse texto será impresso sempre ao final !'
         }
     }
 
